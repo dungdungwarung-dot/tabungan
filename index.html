@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Tabungan Siswa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b5d5b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+  html,body{margin:0;height:100%;background:#eef4f4}
+  iframe{position:fixed;inset:0;width:100%;height:100%;border:0}
+  #off{display:none;position:fixed;inset:0;align-items:center;justify-content:center;flex-direction:column;
+       font:16px Roboto,sans-serif;color:#17262b;background:#eef4f4;text-align:center;padding:24px}
+  #off button{margin-top:14px;background:#0b5d5b;color:#fff;border:0;border-radius:12px;padding:12px 22px;font:inherit}
+</style>
+</head>
+<body>
+<iframe id="app" allow="clipboard-write" title="Tabungan Siswa"></iframe>
+<div id="off"><b>Tidak ada koneksi internet</b><span>Aplikasi membutuhkan internet untuk membuka data.</span>
+  <button onclick="load()">Coba lagi</button></div>
+<script>
+  // === GANTI dengan URL Web App Apps Script Anda (yang berakhiran /exec) ===
+  var APP_URL = 'https://script.google.com/macros/s/AKfycbxSjmR0jIh0BVM0v3lwJz6PLg6uEf5m_62GUG5b7yUqEPyuCsSuvup28ogT_RIn7W32/exec';
+
+  function load() {
+    if (!navigator.onLine) { document.getElementById('off').style.display = 'flex'; return; }
+    document.getElementById('off').style.display = 'none';
+    document.getElementById('app').src = APP_URL;
+  }
+  window.addEventListener('online', load);
+  load();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
